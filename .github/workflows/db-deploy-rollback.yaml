@@ -7,8 +7,9 @@ on:
     inputs:
       deploy_action:
         type: choice
-        - deploy
-        - rollback
+        options:
+          - deploy
+          - rollback
         required: true
         description: Deploy or Rollback
         default: deploy
