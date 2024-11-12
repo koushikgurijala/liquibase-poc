@@ -14,10 +14,7 @@ on:
         description: Deploy or Rollback
         default: deploy
 
-env:
-
 jobs:
-
   db-scripts-actions:
     runs-on: [ ubuntu-latest ]
     outputs:
