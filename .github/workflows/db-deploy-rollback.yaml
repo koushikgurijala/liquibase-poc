@@ -1,45 +1,44 @@
 name: DB Scripts Deployment workflow
 run-name: DB Scripts Deployment Workflow - ${{ inputs.deploy_action }}
 on:
-  # push:
-  #   branches: [master]
-  workflow_dispatch:
-    inputs:
-      deploy_action:
-        type: choice
-        - deploy
-        - rollback
-        required: true
-        description: Deploy or Rollback
-        default: deploy
+  push:
+  # workflow_dispatch:
+  #   inputs:
+  #     deploy_action:
+  #       type: choice
+  #       - deploy
+  #       - rollback
+  #       required: true
+  #       description: Deploy or Rollback
+  #       default: deploy
 
 env:
 
 jobs:
 
-  db-scripts-actions:
+  test-hob-1:
     runs-on: [ ubuntu-latest ]
-    outputs:
-      BUILD_NUMBER: ${{ steps.Init.outputs.BUILD_NUMBER }}
+  env:
+    env_value: DEV
       
     steps:
     # Check out the repo
     - name: Checkout
       uses: actions/checkout@v3
-    
-    - name: Liquibase Validate
-      uses: liquibase-github-actions/validate@v4.30.0
+
+    - name: DotEnv action variables
+      uses: xom9ikk/dotenv@v2.3.0
       with:
-        changelogFile: "changelog.sql"
-        url: ""
-        contextFilter: ""
-        defaultCatalogName: ""
-        defaultSchemaName: ""
-        driver: ""
-        driverPropertiesFile: ""
-        labelFilter: ""
-        password: ""
-        username: ""
-
-
+        path: ./variables
+        mode: batchprocesses
+    
+    - name: setup dynamic variables 1
+      run:  |
+        OCP_URL=OCP_${{ env.env_value }}_URL
+        echo "OCP URL is:" ${OCP_URL}
+        echo "OCP_URL=${OCP_URL}" >> $GITHUB_ENV
+    
+    - name: Print Variable from above step
+      run: |
+        echo "{{ env.OCP_URL }}"
     
