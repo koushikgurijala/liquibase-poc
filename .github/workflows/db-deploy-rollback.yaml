@@ -18,7 +18,7 @@ jobs:
   env:
     env_value: DEV
       
-    steps:
+  steps:
     # Check out the repo
     - name: Checkout
       uses: actions/checkout@v3
