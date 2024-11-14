@@ -2,21 +2,12 @@ name: DB Scripts Deployment workflow
 run-name: DB Scripts Deployment Workflow
 on:
   push:
-  # workflow_dispatch:
-  #   inputs:
-  #     deploy_action:
-  #       type: choice
-  #       - deploy
-  #       - rollback
-  #       required: true
-  #       description: Deploy or Rollback
-  #       default: deploy
 
 jobs:
   db-scripts-actions:
     runs-on: [ ubuntu-latest ]
-  env:
-    env_value: DEV
+    env:
+      env_value: DEV
       
     steps:
       - name: Checkout
