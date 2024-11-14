@@ -27,5 +27,5 @@ jobs:
     
       - name: Print Variable from above step
         run: |
-          echo {{ env.OCP_URL }}
+          echo "${{ env.OCP_URL }}"
     
