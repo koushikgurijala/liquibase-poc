@@ -21,7 +21,8 @@ jobs:
     
       - name: setup dynamic variables 1
         run:  |
-          OCP_URL=${{ env.OCP_${{ env.env_value }}_URL }}
+          OCP_temp_URL=OCP_${{ env.env_value }}_URL
+          OCP_URL=${{ env.OCP_temp_URL }}
           echo "OCP URL is:" ${OCP_URL}
           echo "OCP_URL=${OCP_URL}" >> $GITHUB_ENV
     
