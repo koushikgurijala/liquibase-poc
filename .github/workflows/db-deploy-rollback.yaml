@@ -1,5 +1,5 @@
 name: DB Scripts Deployment workflow
-run-name: DB Scripts Deployment Workflow - ${{ inputs.deploy_action }}
+run-name: DB Scripts Deployment Workflow
 on:
   push:
   # workflow_dispatch:
@@ -12,11 +12,8 @@ on:
   #       description: Deploy or Rollback
   #       default: deploy
 
-env:
-
 jobs:
-
-  test-hob-1:
+  db-scripts-actions:
     runs-on: [ ubuntu-latest ]
   env:
     env_value: DEV
