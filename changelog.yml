@@ -1,0 +1,53 @@
+databaseChangeLog:
+
+  # First change set: creates the database schema structure
+  - changeSet:
+      id: "phase1"
+      author: "koushik"
+      comment: "Create the initial database schema structure"
+      labels: "schema-setup"
+      changes:
+        - sqlFile:
+            path: "scripts/schema.sql"
+      rollback:
+        - sqlFile:
+            path: "scripts/schema_rollback.sql"
+
+  # Second change set: populates the database with initial data
+  - changeSet:
+      id: "phase2"
+      author: "koushik"
+      comment: "Insert initial data into the database tables"
+      labels: "initial-data"
+      changes:
+        - sqlFile:
+            path: "scripts/data.sql"
+      rollback:
+        - sqlFile:
+            path: "scripts/data_rollback.sql"
+
+  # Third change set: increases the size of the 'name' attribute
+  - changeSet:
+      id: "phase3"
+      author: "koushik"
+      comment: "Increase size of the 'name' attribute in the database"
+      labels: "attribute-size-update"
+      changes:
+        - sqlFile:
+            path: "scripts/index.sql"
+      rollback:
+        - sqlFile:
+            path: "scripts/index_rollback.sql"
+
+  # Fourth change set: populates the database with data
+  - changeSet:
+      id: "phase4"
+      author: "koushik"
+      comment: "Insert data into the database tables"
+      labels: "initial-data"
+      changes:
+        - sqlFile:
+            path: "scripts/data_add.sql"
+      rollback:
+        - sqlFile:
+            path: "scripts/data_add_rollback.sql"

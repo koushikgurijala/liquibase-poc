@@ -1,0 +1,27 @@
+name: Liquibase Rollback With ID
+
+on:
+  workflow_dispatch:
+    inputs:
+      changesetId:
+        description: "The ID of the changeset to rollback"
+        required: true
+        default: ""
+      author:
+        description: "Author of above changeset"
+        required: true
+        default: ""
+
+jobs:
+  RollBack_With_ID:
+    runs-on: ubuntu-latest
+    steps: 
+    - uses: actions/checkout@v2
+    - uses: liquibase-github-actions/rollback-one-changeset@v4.30.0
+      with:
+        changesetId: "${{ github.event.inputs.changesetId }}"
+        changesetAuthor: "${{ github.event.inputs.author }}"
+        classpath: 'jarfile/mysql-connector-j-9.1.0.jar'
+        changeLogFile: 'changelog.yml'
+        changesetPath: ${{ secrets.DB_PASSWORD }}
+        url: ${{ secrets.DB_URL }}
